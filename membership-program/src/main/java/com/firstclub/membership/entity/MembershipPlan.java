@@ -1,0 +1,39 @@
+package com.firstclub.membership.entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+
+@Entity
+@Table(name = "membership_plans")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class MembershipPlan {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, unique = true)
+    private PlanType planType;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
+
+    @Column(nullable = false)
+    private Integer durationInDays;
+
+    @Column(length = 500)
+    private String description;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private Boolean active = true;
+}
